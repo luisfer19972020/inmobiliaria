@@ -1,13 +1,13 @@
-package com.inmobiliaria.clientesservice;
+package com.inmobiliaria.clienteservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientesServiceApplication {
+public class ClienteServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientesServiceApplication.class, args);
+		SpringApplication.run(ClienteServiceApplication.class, args);
 	}
 
 }

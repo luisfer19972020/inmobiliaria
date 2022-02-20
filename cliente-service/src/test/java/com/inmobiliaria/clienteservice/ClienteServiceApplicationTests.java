@@ -1,10 +1,10 @@
-package com.inmobiliaria.clientesservice;
+package com.inmobiliaria.clienteservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ClientesServiceApplicationTests {
+class ClienteServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
