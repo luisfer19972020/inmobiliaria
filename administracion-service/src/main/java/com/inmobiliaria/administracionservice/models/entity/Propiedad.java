@@ -1,9 +1,14 @@
 package com.inmobiliaria.administracionservice.models.entity;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class Propiedad {
+public class Propiedad implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    
     private Long id;
     private Boolean ocupada;
     @NotBlank

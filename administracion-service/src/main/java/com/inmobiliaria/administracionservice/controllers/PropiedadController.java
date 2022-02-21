@@ -35,7 +35,7 @@ public class PropiedadController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("propiedades", administracionService.getPropiedades());
+        model.addAttribute("propiedades",administracionService.getPropiedades());
         return "admin/propiedades/index";
     }
 

@@ -14,15 +14,14 @@ public class AdministracionService implements IAdministracionService {
     
     @Autowired
     private RestTemplate restTemplate;
-
+    
     @Autowired
     private PropiedadFeingClient propiedadFeingClient;
 
     @Override
     @SuppressWarnings("all")
     public List<Propiedad> getPropiedades() {
-        List<Propiedad> propiedades = restTemplate.getForObject("http://localhost:8003/propiedad", List.class);
-        return propiedades;
+        return restTemplate.getForObject("http://localhost:8003/propiedad", List.class);
     }
 
     @Override
