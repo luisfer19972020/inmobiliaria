@@ -15,12 +15,12 @@ spring:
       discovery:
         locator:
           enabled: true
-    routes:
-      - id: administracion-service
-        uri: lb://administracion-service
-        predicates:
-          - Path=/admin/**
-      - id: propiedad-service
-        uri: lb://propiedad-service
-        predicates:
-          - Path=/propiedad/**
+      routes:
+        - id: administracion-service
+          uri: lb://administracion-service
+          predicates:
+            - Path=/admin/**
+        - id: propiedad-service
+          uri: lb://propiedad-service
+          predicates:
+            - Path=/propiedad/**
