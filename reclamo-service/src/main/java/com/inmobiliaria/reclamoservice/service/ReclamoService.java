@@ -1,4 +1,4 @@
-package com.inmobiliaria.reclamoservice.service;
+/* package com.inmobiliaria.reclamoservice.service;
 
 import java.util.List;
 
@@ -25,6 +25,10 @@ public class ReclamoService {
     public Reclamo save(Reclamo reclamo) {
         Reclamo reclamoNew = reclamoRepository.save(reclamo);
         return reclamoNew;
-    }
+    } */
 
-}
+    // FALTA DELETE
+/*     public void deleteById(Integer id) {
+        reclamoRepository.deleteById(id);
+    }
+} */

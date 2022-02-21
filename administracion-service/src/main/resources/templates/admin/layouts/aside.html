@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org/" lang="en">
+<!-- Main Sidebar Container -->
+<aside th:fragment="aside" class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a th:href="@{/admin}" class="brand-link">
+        <img th:src="@{/img/logo.png}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8" >
+        <span class="brand-text font-weight-light text-bold">Inmobiliaria</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img th:src="@{/img/usuario.png}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a sec:authentication="name" class="d-block"></a>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <p>
+                            Control de pagos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="http://conaic.test/administracion/usuarios" class="nav-link">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                <p>Alquileres</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="http://conaic.test/administracion/roles" class="nav-link">
+                                <i class="fas fa-handshake"></i>
+                                <p>Compras de propiedades</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasRole('ROLE_AGENTE')" class="nav-item">
+                    <a th:href="@{/admin/huevos}" class="nav-link">
+                        <i class="fas fa-address-book"></i>
+                        <p>Citas</p>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_SECRETARIA')" class="nav-item">
+                    <a th:href="@{/admin/huevos}" class="nav-link">
+                        <i class="fas fa-angry"></i>
+                        <p>Reclamos</p>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_SECRETARIA')" class="nav-item">
+                    <a th:href="@{/admin/huevos}" class="nav-link">
+                        <i class="fas fa-laptop-house"></i>
+                        <p>Pedidos</p>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                    <a th:href="@{/admin/propiedades}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <p>Gestión de Propiedades</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+</html>

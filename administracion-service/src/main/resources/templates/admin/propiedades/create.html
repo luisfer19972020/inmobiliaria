@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org/" lang="en">
+
+<head th:replace="/admin/layouts/head :: head"></head>
+
+<body class="hold-transition sidebar-mini dark-mode">
+    <div class="wrapper">
+        <nav th:replace="/admin/layouts/nav :: nav"></nav>
+        <aside th:replace="/admin/layouts/aside :: aside"></aside>
+        <!-- HEADER -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">INICIO</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
+                                <li class="breadcrumb-item"><a th:href="@{/admin/propiedades}">Propiedades</a></li>
+                                <li class="breadcrumb-item active">Crear Propiedad</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layouts/alerts :: alerts"></div>
+            <div class="container">
+                <div class="card shadow-lg mx-4">
+                    <div class="card-header">
+                        <h1 class="text-dark text-center border border-dark border-top-0 border-left-0 border-right-0">
+                            Crear Propiedad
+                        </h1>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/propiedades/store}" th:object="${propiedad}" method="post"
+                            enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Descripcion:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" th:field="*{descripcion}" class="form-control"
+                                        th:errorclass="'form-control is-invalid'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}"
+                                        th:errors="*{descripcion}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Habitaciones: </label>
+                                <div class="col-sm-6">
+                                    <input type="number" min="0" th:field="*{habitaciones}" class="form-control"
+                                        th:errorclass="'form-control is-invalid'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('habitaciones')}"
+                                        th:errors="*{habitaciones}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">m2: </label>
+                                <div class="col-sm-6">
+                                    <input step="0.5" type="number" min="0" th:field="*{m2}" class="form-control"
+                                        th:errorclass="'form-control is-invalid'">
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('m2')}"
+                                        th:errors="*{m2}"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Tipo de vivienda:</label>
+                                <div class="col-sm-6">
+                                    <select id="selectTipoPropieadad" class="form-control" th:field="*{tipo}"
+                                        onchange="helper.displayCosto()">
+                                        <option value="">--Seleccionar--</option>
+                                        <option value="1">Compra</option>
+                                        <option value="2">Alquiler</option>
+                                    </select>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}"
+                                        th:errors="*{tipo}"></small>
+                                </div>
+                            </div>
+                            <div id="costo_compra" style="display: none;">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Costo de compra: </label>
+                                    <div class="col-sm-6">
+                                        <input id="input_costo_compra" step="0.5" type="number" min="0"
+                                            th:field="*{costoCompra}" class="form-control"
+                                            th:errorclass="'form-control is-invalid'">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('costoCompra')}"
+                                            th:errors="*{costoCompra}"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="costo_alquiler" style="display: none;">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Costo de Alquiler: </label>
+                                    <div class="col-sm-6">
+                                        <input id="input_costo_alquiler" step="0.5" type="number" min="0"
+                                            th:field="*{costoAlquiler}" class="form-control"
+                                            th:errorclass="'form-control is-invalid'">
+                                        <small class="form-text text-danger"
+                                            th:if="${#fields.hasErrors('costoAlquiler')}"
+                                            th:errors="*{costoAlquiler}"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="file" class="col-sm-2 col-form-label ">
+                                    Foto
+                                </label>
+                                <div class="col-sm-6">
+                                    <input class=" form-control-file" name="file" type="file">
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <a class="btn btn-danger" th:href="@{/admin/propiedades}">Cancelar</a>
+                                <button class="btn btn-primary mx-2" type="submit">Crear Propiedad </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside th:replace="/admin/layouts/right-aside :: right-aside"></aside>
+
+        <footer th:replace="/admin/layouts/footer :: footer"></footer>
+        <script>
+            var helper = {
+                displayCosto: function () {
+                    switch ($('#selectTipoPropieadad').val()) {
+                        case "1":
+                            $('#input_costo_compra').prop('required', true);
+                            $('#input_costo_alquiler').prop('required', false);
+                            $('#input_costo_alquiler').val(null);
+                            $('#costo_compra').show();
+                            $('#costo_alquiler').hide()
+                            break;
+                        case "2":
+                            $('#input_costo_compra').prop('required', false);
+                            $('#input_costo_compra').val(null);
+                            $('#input_costo_alquiler').prop('required', true);
+                            $('#costo_compra').hide();
+                            $('#costo_alquiler').show()
+                            break;
+
+                        default:
+                            $('#input_costo_compra').prop('required', false);
+                            $('#input_costo_alquiler').prop('required', false);
+                            $('#costo_compra').hide()
+                            $('#costo_alquiler').hide()
+                            break;
+                    }
+                },
+            }
+            window.onload = helper.displayCosto();
+
+        </script>
+    </div>
+</body>
+
+</html>

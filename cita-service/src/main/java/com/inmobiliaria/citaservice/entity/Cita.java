@@ -1,16 +1,19 @@
 package com.inmobiliaria.citaservice.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "citas")
-public class Cita {
+public class Cita implements Serializable {
     
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String status;
 
@@ -23,11 +26,11 @@ public class Cita {
     @Column(name = "usuario_id")
     private int usuarioId;
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,5 +64,5 @@ public class Cita {
 
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
-    }
+    }    
 }
