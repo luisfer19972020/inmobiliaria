@@ -4,7 +4,7 @@ spring:
       filter:
         enabled: 'true'
   application:
-    name: reclamo-service
+    name: cita-service
   cloud:
     config:
         enabled: true
@@ -17,7 +17,7 @@ spring:
     password: 'iotM98'
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://localhost/inmobiliaria_reclamos_db
+    url: jdbc:mysql://localhost:3306/inmobiliaria_reclamos_db
   jpa:
     hibernate:
       ddl-auto: create-drop
