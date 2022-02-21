@@ -1,0 +1,30 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  application:
+    name: reclamo-service
+  cloud:
+    config:
+        enabled: true
+        uri: http://localhost:8081
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+    password: 'iotM98'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost/inmobiliaria_reclamos_db
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: 'true'
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+logging:
+  level:
+    org:
+      hibernante:
+        SQL: debug
