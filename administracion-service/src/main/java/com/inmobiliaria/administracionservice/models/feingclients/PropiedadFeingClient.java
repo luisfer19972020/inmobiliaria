@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-@FeignClient(name = "propiedad-service", url = "http://localhost:8003")
+@FeignClient(name = "propiedad-service")
 public interface PropiedadFeingClient {
     @PostMapping("/propiedad")
     public Propiedad save(@RequestBody Propiedad propiedad);
