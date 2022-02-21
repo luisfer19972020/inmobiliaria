@@ -1,14 +1,15 @@
-package com.inmobiliaria.propiedadservice;
+package com.inmobiliaria.gatewayservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-@EnableEurekaClient
+
 @SpringBootApplication
-public class PropiedadServiceApplication {
+@EnableEurekaClient
+public class GatewayServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PropiedadServiceApplication.class, args);
+		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
 
 }

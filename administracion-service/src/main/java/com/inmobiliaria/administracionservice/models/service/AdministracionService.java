@@ -21,12 +21,12 @@ public class AdministracionService implements IAdministracionService {
     @Override
     @SuppressWarnings("all")
     public List<Propiedad> getPropiedades() {
-        return restTemplate.getForObject("http://localhost:8003/propiedad", List.class);
+        return restTemplate.getForObject("http://propiedad-service/propiedad", List.class);
     }
 
     @Override
     public Propiedad getPropiedadById(Long id) {
-        return restTemplate.getForObject("http://localhost:8003/propiedad/"+id, Propiedad.class);
+        return restTemplate.getForObject("http://propiedad-service/propiedad/"+id, Propiedad.class);
     }
 
     @Override
