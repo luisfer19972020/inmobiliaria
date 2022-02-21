@@ -4,7 +4,7 @@ spring:
       filter:
         enabled: 'true'
   application:
-    name: cita-service
+    name: reclamo-service
   cloud:
     config:
         enabled: true
