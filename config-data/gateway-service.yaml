@@ -19,7 +19,7 @@ spring:
         - id: administracion-service
           uri: lb://administracion-service
           predicates:
-            - Path=/**
+            - Path=/admin/**
         - id: propiedad-service
           uri: lb://propiedad-service
           predicates:
