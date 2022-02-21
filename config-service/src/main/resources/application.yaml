@@ -1,3 +1,4 @@
+
 server:
   port: 8081
 spring:
@@ -5,7 +6,7 @@ spring:
     config:
       server:
         git:
-          default-label: config-server
+          default-label: main
           uri: https://github.com/luisfer19972020/inmobiliaria
           search-paths: config-data
   application:
