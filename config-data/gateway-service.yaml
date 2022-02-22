@@ -24,3 +24,7 @@ spring:
           uri: lb://propiedad-service
           predicates:
             - Path=/propiedad/**
+        - id: pago-service
+          uri: lb://pago-service
+          predicates:
+            - Path=/pago/**

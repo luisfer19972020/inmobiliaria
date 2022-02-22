@@ -25,36 +25,27 @@ public class PropiedadController {
     @GetMapping
     public ResponseEntity<List<Propiedad>> getAll() {
         List<Propiedad> propiedades = propiedadService.getAll();
-        if (propiedades.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(propiedades);
+        return propiedades.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(propiedades);
     }
-  
+
     @GetMapping("/{id}")
     public ResponseEntity<Propiedad> getById(@PathVariable Long id) {
         Propiedad propiedad = propiedadService.getPropiedadById(id);
-        if (propiedad==null) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(propiedad);
+        return propiedad == null ? ResponseEntity.ok(propiedad) : ResponseEntity.noContent().build();
     }
-    
+
     @PostMapping()
     public ResponseEntity<Propiedad> save(@RequestBody Propiedad propiedad) {
-        Propiedad propiedadNew = propiedadService.save(propiedad);
-        return ResponseEntity.ok(propiedadNew);
+        return ResponseEntity.ok(propiedadService.save(propiedad));
     }
-   
+
     @PutMapping()
     public ResponseEntity<Propiedad> update(@RequestBody Propiedad propiedad) {
-        Propiedad propiedadNew = propiedadService.save(propiedad);
-        return ResponseEntity.ok(propiedadNew);
+        return ResponseEntity.ok(propiedadService.save(propiedad));
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Propiedad> deleteById(@PathVariable Long id) {
-        Propiedad propiedadNew = propiedadService.deleteById(id);
-        return ResponseEntity.ok(propiedadNew);
+        return ResponseEntity.ok(propiedadService.deleteById(id));
     }
 }

@@ -1,0 +1,30 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  application:
+    name: pago-service
+  cloud:
+    config:
+        enabled: true
+        uri: http://localhost:8081
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+    password: '19971172020'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost/inmobiliaria_pagos_db
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: 'true'
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+logging:
+  level:
+    org:
+      hibernante:
+        SQL: debug
