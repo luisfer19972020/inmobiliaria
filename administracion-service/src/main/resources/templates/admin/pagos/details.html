@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org/" lang="en">
+
+<head th:replace="/admin/layouts/head :: head"></head>
+
+<body class="hold-transition sidebar-mini dark-mode">
+    <div class="wrapper">
+        <nav th:replace="/admin/layouts/nav :: nav"></nav>
+        <aside th:replace="/admin/layouts/aside :: aside"></aside>
+        <!-- HEADER -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">INICIO</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
+                                <li class="breadcrumb-item"><a
+                                        th:href="@{${detalle.pago.tipoPago== 1 ? '/admin/pagos/compra':'/admin/pagos/alquiler'}}">Pagos</a>
+                                </li>
+                                <li class="breadcrumb-item active">Detalle de pago</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="/admin/layouts/alerts :: alerts"></div>
+            <div class="container">
+                <div class="card shadow-lg my-4">
+                    <div class="card-header text-bold text-lg-center" style="font-size: xx-large;">
+                        <h1 class="text-white "></h1>
+                        Detalles del pago</h1>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h5 th:text="${detalle.pago.descripcion}"></h5>
+                        </div>
+                        <div th:if="${detalle.pago.estatus==false}" class="d-flex justify-content-center">
+                            <button th:onclick="'aprobar(' + ${detalle.pago.id} +','+  ${detalle.pago.tipoPago} +')'"
+                                class="mr-2 btn btn-success">Aprobar Pago</button>
+                            <button th:onclick="'rechazar(' + ${detalle.pago.id} + ','+  ${detalle.pago.tipoPago} +')'"
+                                class="ml-2 btn btn-danger">Rechazar Pago</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-sm-8">
+                        <div class="card shadow-lg mb-4">
+                            <div class="card-header">
+                                <center>
+                                    <h3>Datos del pago</h3>
+                                </center>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Estado: <span
+                                            th:class="${detalle.pago.estatus ? 'badge badge-success':'badge badge-danger'}"
+                                            th:text="${detalle.pago.estatus ? 'Aprobado':'Pendiente'}"></span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Tipo:
+                                        <span class="badge badge-info"
+                                            th:text="${detalle.pago.tipoPago==1 ? 'Compra':'Alquiler'}" n>
+
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Fecha de pago:
+                                        <span class="badge badge-success" th:text="${detalle.pago.fechaPago}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card shadow-lg ">
+                            <div class="card-header">
+                                <center>
+                                    <h3>Datos de la propiedad</h3>
+                                </center>
+                                <li class="list-group-item list-group-item-dark">
+                                    <img class="card-img-top img-thumbnail rounded-circle shadow-lg"
+                                        th:src="@{'/uploads/'+${detalle.propiedad.foto}}" alt="">
+                                </li>
+                                <li class="list-group-item">
+                                    <p th:text="${detalle.propiedad.descripcion}"></p>
+                                </li>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <th>Estado</th>
+                                        <th>Habitaciones</th>
+                                        <th>Mts 2</th>
+                                        <th>Costo</th>
+                                        <th>Tipo</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td th:text="${detalle.propiedad.ocupada ? 'Ocupada':'Desocupada'}"></td>
+                                            <td th:text="${detalle.propiedad.habitaciones}"></td>
+                                            <td th:text="${detalle.propiedad.m2}"></td>
+                                            <td
+                                                th:text="${detalle.propiedad.tipo == 1 ? '$'+detalle.propiedad.costoCompra : '$'+detalle.propiedad.costoAlquiler}">
+                                            </td>
+                                            <td th:text="${detalle.propiedad.tipo == 1 ? 'Compra':'Alquiler'}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card shadow-lg">
+                            <div class="card-header">
+                                <center>
+                                    <h3>Datos del cliente</h3>
+                                </center>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-dark">
+                                        <img class="card-img-top img-thumbnail rounded-circle shadow-lg"
+                                            th:src="@{/img/usuario.png}" alt="">
+                                    </li>
+                                    <li class="list-group-item" th:text="${'Nombre: '+detalle.usuario.username}"></li>
+                                    <li class="list-group-item" th:text="${'Rol: '+detalle.usuario.roles[0].authority}">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="/admin/pagos/modal-aprobar :: modal-aprobar"></div>
+        <div th:replace="/admin/pagos/modal-rechazar :: modal-rechazar"></div>
+
+        <aside th:replace="/admin/layouts/right-aside :: right-aside"></aside>
+
+        <footer th:replace="/admin/layouts/footer :: footer"></footer>
+        <script>
+            function aprobar(id, tipo) {
+
+                let formEliminar = document.getElementById('form-aprobar');
+                url = '/admin/pagos/aprobar/' + id + '?tipo=' + tipo;
+                formEliminar.setAttribute('action', url);
+                $('#modal-aprobar').modal('show')
+            }
+            function rechazar(id, tipo) {
+
+                let formEliminar = document.getElementById('form-rechazar');
+                url = '/admin/pagos/rechazar/' + id + '?tipo=' + tipo;
+                formEliminar.setAttribute('action', url);
+                $('#modal-rechazar').modal('show')
+            }
+        </script>
+
+    </div>
+</body>
+
+</html>

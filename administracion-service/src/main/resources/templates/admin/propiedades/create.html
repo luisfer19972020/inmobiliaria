@@ -39,8 +39,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Descripcion:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" th:field="*{descripcion}" class="form-control"
-                                        th:errorclass="'form-control is-invalid'">
+                                    <textarea th:field="*{descripcion}" class="form-control"
+                                        th:errorclass="'form-control is-invalid'" cols="30" rows="10"></textarea>
                                     <small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}"
                                         th:errors="*{descripcion}"></small>
                                 </div>

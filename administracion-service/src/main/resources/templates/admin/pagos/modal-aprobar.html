@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<div th:fragment="modal-aprobar">
+    <div class="modal fade" id="modal-aprobar" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="modal-aprobarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-aprobarLabel">Aprobar Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-aprobar" action="" method="POST">
+                    <div class="modal-body">
+                        <p>¿Esta seguro que desea aprobar el Pago?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Aprobar Pago</button>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <input type="hidden" name="_method" value="PUT">
+
+                </form>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

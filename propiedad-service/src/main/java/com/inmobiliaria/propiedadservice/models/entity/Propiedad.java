@@ -20,6 +20,7 @@ public class Propiedad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean ocupada;
+    @Column(length = 500)
     private String descripcion;
     private String foto;
     private Integer habitaciones;

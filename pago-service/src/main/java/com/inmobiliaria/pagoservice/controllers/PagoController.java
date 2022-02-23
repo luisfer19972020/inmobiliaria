@@ -27,6 +27,12 @@ public class PagoController {
         List<Pago> pagos = pagoService.getAll();
         return pagos.isEmpty() ? ResponseEntity.noContent().build(): ResponseEntity.ok(pagos);
     }
+    
+    @GetMapping("/getByType/{tipo}")
+    public ResponseEntity<List<Pago>> getByTipo(@PathVariable Integer tipo) {
+        List<Pago> pagos = pagoService.getByTipoPago(tipo);
+        return pagos.isEmpty() ? ResponseEntity.noContent().build(): ResponseEntity.ok(pagos);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pago> getById(@PathVariable Long id) {

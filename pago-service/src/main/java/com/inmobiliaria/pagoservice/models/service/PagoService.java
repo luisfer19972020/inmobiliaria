@@ -41,4 +41,10 @@ public class PagoService implements IPagoService {
         return pago;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Pago> getByTipoPago(Integer tipo) {
+        return pagoDao.getByTipoPago(tipo);
+    }
+
 }

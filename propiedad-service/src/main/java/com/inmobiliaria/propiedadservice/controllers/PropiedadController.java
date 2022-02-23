@@ -31,7 +31,7 @@ public class PropiedadController {
     @GetMapping("/{id}")
     public ResponseEntity<Propiedad> getById(@PathVariable Long id) {
         Propiedad propiedad = propiedadService.getPropiedadById(id);
-        return propiedad == null ? ResponseEntity.ok(propiedad) : ResponseEntity.noContent().build();
+        return propiedad == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(propiedad);
     }
 
     @PostMapping()
