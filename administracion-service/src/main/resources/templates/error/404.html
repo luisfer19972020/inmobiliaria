@@ -6,15 +6,14 @@
 <body id="page-top" class="justify-content-center bg-dark">
     <div class="container my-5">
         <center>
-            <img th:src="@{/img/logo.png}" class=" mb-3 " height="300px;" alt="">
+            <img th:src="@{/img/logo.png}" class="mb-3 " height="300px;" alt="">
         </center>
         <div class="card shadow-lg bg-gradient-gray-dark text-white">
             <div class="card-header">
-                Error:  <span class="badge badge-danger shadow-lg text-lg">403</span> Acceso denegado!
+                Error: <span class="badge badge-danger shadow-lg text-lg">404</span> Recurso no encontrado!
             </div>
             <div class="card-body">
-                <h5 class="card-title">Lo sentimos <span th:text="${#authentication.name}"></span> No tienes permiso a
-                    este recurso.</h5>
+                <h5 class="card-title">Lo sentimos <span th:text="${#authentication.name}"></span> Lo sentimos este recurso no se ecuentra en el sistema.</h5>
                 <a class=" ml-3 btn btn-outline-light" th:href="@{/admin}">Regresar al inicio.</a>
             </div>
         </div>

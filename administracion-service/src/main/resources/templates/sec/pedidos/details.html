@@ -8,7 +8,7 @@
         <nav th:replace="/admin/layouts/nav :: nav"></nav>
         <aside th:replace="/admin/layouts/aside :: aside"></aside>
         <!-- HEADER -->
-        <div style="background-image:url(/img/bg-pagos.png);  background-repeat:no-repeat; background-size: 100% 80%; " class="content-wrapper">
+        <div style="background-image:url(/img/bg-pedidos.png);  background-repeat:no-repeat; background-size: 100% 80%; " class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -19,9 +19,9 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
                                 <li class="breadcrumb-item"><a
-                                        th:href="@{${detalle.pago.tipoPago== 1 ? '/admin/pagos/compra':'/admin/pagos/alquiler'}}">Pagos</a>
+                                        th:href="@{/admin/pedidos}">Pedidos</a>
                                 </li>
-                                <li class="breadcrumb-item active">Detalle de pago</li>
+                                <li class="breadcrumb-item active">Detalle de pedido</li>
                             </ol>
                         </div>
                     </div>
@@ -32,16 +32,16 @@
                 <div class="card shadow-lg my-4">
                     <div class="card-header text-bold text-lg-center" style="font-size: xx-large;">
                         <h1 class="text-white "></h1>
-                        Detalles del pago</h1>
+                        Detalles del pedido</h1>
                     </div>
                     <div class="card-body">
                         <div>
-                            <h5 th:text="${detalle.pago.descripcion}"></h5>
+                            <h5 th:text="${pedido.pago.descripcion}"></h5>
                         </div>
-                        <div th:if="${detalle.pago.estatus==false}" class="d-flex justify-content-center">
-                            <button th:onclick="'aprobar(' + ${detalle.pago.id} +','+  ${detalle.pago.tipoPago} +')'"
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" th:if="${pedido.pago.estatus==false}" class="d-flex justify-content-center">
+                            <button th:onclick="'aprobar(' + ${pedido.pago.id} +','+  ${pedido.pago.tipoPago} +')'"
                                 class="mr-2 btn btn-success">Aprobar Pago</button>
-                            <button th:onclick="'rechazar(' + ${detalle.pago.id} + ','+  ${detalle.pago.tipoPago} +')'"
+                            <button th:onclick="'rechazar(' + ${pedido.pago.id} + ','+  ${pedido.pago.tipoPago} +')'"
                                 class="ml-2 btn btn-danger">Rechazar Pago</button>
                         </div>
                     </div>
@@ -58,19 +58,19 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         Estado: <span
-                                            th:class="${detalle.pago.estatus ? 'badge badge-success':'badge badge-danger'}"
-                                            th:text="${detalle.pago.estatus ? 'Aprobado':'Pendiente'}"></span>
+                                            th:class="${pedido.pago.estatus ? 'badge badge-success':'badge badge-danger'}"
+                                            th:text="${pedido.pago.estatus ? 'Aprobado':'Pendiente'}"></span>
                                     </li>
                                     <li class="list-group-item">
                                         Tipo:
                                         <span class="badge badge-info"
-                                            th:text="${detalle.pago.tipoPago==1 ? 'Compra':'Alquiler'}" n>
+                                            th:text="${pedido.pago.tipoPago==1 ? 'Compra':'Alquiler'}" n>
 
                                         </span>
                                     </li>
                                     <li class="list-group-item">
                                         Fecha de pago:
-                                        <span class="badge badge-success" th:text="${detalle.pago.fechaPago}"></span>
+                                        <span class="badge badge-success" th:text="${pedido.pago.fechaPago}"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -82,10 +82,10 @@
                                 </center>
                                 <li class="list-group-item list-group-item-dark">
                                     <img class="card-img-top img-thumbnail rounded-circle shadow-lg"
-                                        th:src="@{'/uploads/'+${detalle.propiedad.foto}}" alt="">
+                                        th:src="@{'/uploads/'+${pedido.propiedad.foto}}" alt="">
                                 </li>
                                 <li class="list-group-item">
-                                    <p th:text="${detalle.propiedad.descripcion}"></p>
+                                    <p th:text="${pedido.propiedad.descripcion}"></p>
                                 </li>
                             </div>
                             <div class="card-body">
@@ -99,13 +99,13 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td th:text="${detalle.propiedad.ocupada ? 'Ocupada':'Desocupada'}"></td>
-                                            <td th:text="${detalle.propiedad.habitaciones}"></td>
-                                            <td th:text="${detalle.propiedad.m2}"></td>
+                                            <td th:text="${pedido.propiedad.ocupada ? 'Ocupada':'Desocupada'}"></td>
+                                            <td th:text="${pedido.propiedad.habitaciones}"></td>
+                                            <td th:text="${pedido.propiedad.m2}"></td>
                                             <td
-                                                th:text="${detalle.propiedad.tipo == 1 ? '$'+detalle.propiedad.costoCompra : '$'+detalle.propiedad.costoAlquiler}">
+                                                th:text="${pedido.propiedad.tipo == 1 ? '$'+pedido.propiedad.costoCompra : '$'+pedido.propiedad.costoAlquiler}">
                                             </td>
-                                            <td th:text="${detalle.propiedad.tipo == 1 ? 'Compra':'Alquiler'}"></td>
+                                            <td th:text="${pedido.propiedad.tipo == 1 ? 'Compra':'Alquiler'}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -125,8 +125,8 @@
                                         <img class="card-img-top img-thumbnail rounded-circle shadow-lg"
                                             th:src="@{/img/usuario.png}" alt="">
                                     </li>
-                                    <li class="list-group-item" th:text="${'Nombre: '+detalle.usuario.username}"></li>
-                                    <li class="list-group-item" th:text="${'Rol: '+detalle.usuario.roles[0].authority}">
+                                    <li class="list-group-item" th:text="${'Nombre: '+pedido.usuario.username}"></li>
+                                    <li class="list-group-item" th:text="${'Rol: '+pedido.usuario.roles[0].authority}">
                                     </li>
                                 </ul>
                             </div>
