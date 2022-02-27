@@ -2,6 +2,7 @@ package com.inmobiliaria.administracionservice.controllers;
 
 import com.inmobiliaria.administracionservice.models.service.IAdministracionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,12 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@Secured("ROLE_ADMIN")
 @RequestMapping("admin/pagos")
-@SessionAttributes("pago")
 public class PagoController {
 
     @Autowired
